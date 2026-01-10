@@ -3274,7 +3274,7 @@ document.querySelectorAll("video").forEach(video=>{
   }
   // Add controls to improve reliability on mobile autoplay policies
   if(!video.hasAttribute("controls")){
-    video.setAttribute("controls", "controls");
+    video.setAttribute("controls","controls");
   }
   // Nudge autoplay-safe flags
   if(!video.hasAttribute("autoplay")){
@@ -3295,6 +3295,9 @@ const videoObserver = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     const vid = entry.target;
     if(entry.isIntersecting){
+      if(vid.dataset.src && !vid.src){
+        vid.src = vid.dataset.src;
+      }
       vid.play().catch(()=>{});
     }else{
       vid.pause();
