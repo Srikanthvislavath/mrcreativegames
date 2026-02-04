@@ -1098,6 +1098,26 @@ box-shadow:0 20px 50px rgba(255,122,0,.2), 0 0 30px rgba(255,122,0,.1);
   border:1px solid rgba(255,255,255,.08);
   transition:all .4s ease;
   opacity: 1;
+  object-fit: contain;
+  min-height: 250px;
+  max-height: 400px;
+  -webkit-appearance: media-controls;
+}
+
+/* Webkit video player controls */
+video::-webkit-media-controls {
+  display: flex !important;
+}
+
+video::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* iOS video controls styling */
+@supports (font: -apple-system-body) {
+  .project-card video::-webkit-media-controls {
+    display: flex !important;
+  }
 }
 
 .project-card:hover video,
@@ -2563,105 +2583,105 @@ animation:glowPulse 2s ease-in-out infinite;
 
 <div class="portfolio-grid">
 <div class="project-card" data-category="symbols" data-video="projects/Hammer_Symbol_Idle_Final.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/Hammer_Symbol_Idle_Final.mp4" type="video/mp4">
   <source src="projects/Hammer_Symbol_Idle_Final.webm" type="video/webm">
 </video>
 <h3>Hammer Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Scatter.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/Scatter.mp4" type="video/mp4">
   <source src="projects/Scatter.webm" type="video/webm">
 </video>
 <h3>Scatter Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/slot-symbol.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/slot-symbol.mp4" type="video/mp4">
   <source src="projects/slot-symbol.webm" type="video/webm">
 </video>
 <h3>Slot Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Viking_Character_Symbol_Final.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/Viking_Character_Symbol_Final.mp4" type="video/mp4">
   <source src="projects/Viking_Character_Symbol_Final.webm" type="video/webm">
 </video>
 <h3>Viking Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Viking_Character_Symbol_Hammer_Symbol_Idle_Final.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/Viking_Character_Symbol_Hammer_Symbol_Idle_Final.mp4" type="video/mp4">
   <source src="projects/Viking_Character_Symbol_Hammer_Symbol_Idle_Final.webm" type="video/webm">
 </video>
 <h3>Viking Hammer Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Wild.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/Wild.mp4" type="video/mp4">
   <source src="projects/Wild.webm" type="video/webm">
 </video>
 <h3>Wild Symbol</h3>
 </div>
 <div class="project-card" data-category="fx" data-video="projects/fx-ui.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/fx-ui.mp4" type="video/mp4">
   <source src="projects/fx-ui.webm" type="video/webm">
 </video>
 <h3>FX UI</h3>
 </div>
 <div class="project-card" data-category="ui" data-video="projects/samurai-animation.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/samurai-animation.mp4" type="video/mp4">
   <source src="projects/samurai-animation.webm" type="video/webm">
 </video>
 <h3>Samurai UI</h3>
 </div>
 <div class="project-card" data-category="fx" data-video="projects/slot-symbol.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/slot-symbol.mp4" type="video/mp4">
   <source src="projects/slot-symbol.webm" type="video/webm">
 </video>
 <h3>Slot Symbol FX</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/spine-character.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/spine-character.mp4" type="video/mp4">
   <source src="projects/spine-character.webm" type="video/webm">
 </video>
 <h3>Spine Character</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/RUN.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/RUN.mp4" type="video/mp4">
   <source src="projects/RUN.webm" type="video/webm">
 </video>
 <h3>Run Animation</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/Lady_Talbot_2.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/Lady_Talbot_2.mp4" type="video/mp4">
   <source src="projects/Lady_Talbot_2.webm" type="video/webm">
 </video>
 <h3>Lady Talbot</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/IDLE.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/IDLE.mp4" type="video/mp4">
   <source src="projects/IDLE.webm" type="video/webm">
 </video>
 <h3>Idle Animation</h3>
 </div>
 <div class="project-card" data-category="ui" data-video="projects/samurai-animation.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/samurai-animation.mp4" type="video/mp4">
   <source src="projects/samurai-animation.webm" type="video/webm">
 </video>
 <h3>Samurai UI</h3>
 </div>
 <div class="project-card" data-category="reel" data-video="projects/slot-symbol.webm">
-<video muted loop playsinline autoplay preload="metadata">
+<video muted loop playsinline preload="metadata">
   <source src="projects/slot-symbol.mp4" type="video/mp4">
   <source src="projects/slot-symbol.webm" type="video/webm">
 </video>
@@ -3596,31 +3616,67 @@ const videoObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting && !videoLoadMap.has(video)) {
       videoLoadMap.add(video);
       
+      // Force display and sizing
+      video.style.display = 'block';
+      video.style.width = '100%';
+      video.style.height = 'auto';
+      
       // Set up video attributes
       video.setAttribute("playsinline", "true");
       video.muted = true;
       video.loop = true;
-      video.autoplay = true;  // Enable autoplay for all devices including iOS
+      video.preload = "metadata";
+      video.controls = true;  // Always show controls for reliability
       
       // Load video source if not already loaded
       if (!video.src && video.dataset.src) {
         video.src = video.dataset.src;
       }
       
-      // Mobile check
+      // Detect iOS
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       const isMobile = browserFeatures.mobileDevice || window.matchMedia('(max-width: 900px)').matches;
       
-      // Set preload based on device type
-      video.preload = isMobile ? "metadata" : "metadata";
-      
-      // Attempt to play when visible (works on all devices with muted + autoplay)
-      setTimeout(() => {
-        if (video.paused && video.readyState >= 2) {
-          video.play().catch(err => {
-            console.warn('Video autoplay failed:', video.src);
+      if (isIOS) {
+        video.style.cursor = 'pointer';
+        // iOS specific settings - ensure video is visible and playable
+        video.setAttribute("webkit-playsinline", "true");
+        video.setAttribute("x5-playsinline", "true");
+        video.setAttribute("x5-video-player-type", "h5");
+        
+        console.log('iOS video detected:', video.src);
+        
+        // Add error handler to debug
+        video.addEventListener('error', (e) => {
+          console.error('Video error on iOS:', {
+            error: e,
+            src: video.src,
+            currentSrc: video.currentSrc,
+            networkState: video.networkState,
+            readyState: video.readyState
           });
-        }
-      }, 200);
+        });
+        
+        // Log when video can play
+        video.addEventListener('canplay', () => {
+          console.log('Video canplay on iOS:', video.src);
+        });
+        
+        // Log when video loads
+        video.addEventListener('loadstart', () => {
+          console.log('Video loadstart on iOS:', video.src);
+        });
+      } else if (!isMobile) {
+        // Desktop: autoplay when visible
+        video.autoplay = true;
+        setTimeout(() => {
+          if (video.paused && video.readyState >= 2) {
+            video.play().catch(err => {
+              console.warn('Video autoplay failed:', video.src);
+            });
+          }
+        }, 200);
+      }
     } else if (!entry.isIntersecting && videoLoadMap.has(video)) {
       // Pause video when out of view
       video.pause();
@@ -3632,6 +3688,7 @@ const videoObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll("video").forEach(video => {
   videoObserver.observe(video);
 });
+
 
 // Browser compatibility: Handle older browsers without IntersectionObserver
 if (!browserFeatures.supportsIntersectionObserver) {
