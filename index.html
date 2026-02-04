@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior:smooth">
+<html lang="en" style="scroll-behavior:smooth;-webkit-user-select:none;user-select:none">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes, maximum-scale=5.0, minimum-scale=1.0"/>
 
 <title>Slot Game Art & Spine Animation Studio | MR Creative Games</title>
 <meta name="description" content="MR Creative Games is a professional slot game art & Spine 2D animation studio delivering UI, symbols, FX, and production-ready assets for gaming studios worldwide." />
@@ -21,11 +21,30 @@
 <!-- Theme color for mobile browsers -->
 <meta name="theme-color" content="#0e0e0e">
 
+<!-- Mobile video playback fix -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <!-- Preload hero image -->
 <link rel="preload" as="image" href="hero-bg.jpg">
 
 <!-- EmailJS Library -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Browser Compatibility Enhancements -->
+<!-- Polyfill for older browsers -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver,Promise,fetch,Array.from,Object.assign"></script>
+
+<!-- Prefetch critical resources for better performance -->
+<link rel="prefetch" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<!-- Fallback fonts for older browsers -->
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</noscript>
 
 
 <style>
@@ -41,12 +60,21 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 
+/* Browser compatibility fallbacks */
+html{
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+}
+
 body{
-font-family:'Montserrat',sans-serif;
+font-family:'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 background:var(--bg-dark);
 color:var(--text-main);
 overflow-x:hidden;
 position:relative;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-rendering: optimizeLegibility;
 }
 
 /* Scroll Progress Bar */
@@ -129,7 +157,7 @@ z-index:0;
 .game-details{background:var(--bg-light)}
 .game-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
 .game-card{background:linear-gradient(140deg, rgba(255,255,255,.04), rgba(255,122,0,.08));border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 12px 36px rgba(0,0,0,.35)}
-.game-media video{width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.06);background:#000}
+.game-media video{width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.06);background:#000;max-width:100%;height:auto}
 .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;font-size:13px;color:var(--text-muted)}
 .meta-grid span{display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
 .game-card h3{margin:0;font-size:18px}
@@ -147,7 +175,7 @@ z-index:0;
 .interactive-card summary::after{content:"↗";font-size:12px;color:var(--accent);opacity:.7}
 .interactive-card[open]{border-color:rgba(255,122,0,.4);transform:translateY(-2px)}
 .interactive-card[open] summary{color:var(--accent)}
-.interactive-card video{width:100%;border-radius:10px;margin-top:12px;border:1px solid rgba(255,255,255,.07)}
+.interactive-card video{width:100%;border-radius:10px;margin-top:12px;border:1px solid rgba(255,255,255,.07);max-width:100%;height:auto}
 .interactive-card p{margin:10px 0 0;color:var(--text-muted)}
 .cta-row{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
 
@@ -158,7 +186,7 @@ z-index:0;
 .media-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 18px 34px rgba(0,0,0,.35);border-color:rgba(255,122,0,.24)}
 .media-card:hover::after{opacity:1}
 .media-card .label{display:inline-block;padding:6px 10px;border-radius:12px;background:rgba(255,122,0,.12);color:var(--accent);font-weight:700;font-size:12px;margin-bottom:8px}
-.media-card video{width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:#000}
+.media-card video{width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:#000;max-width:100%;height:auto}
 .media-note{color:var(--text-muted);font-size:14px;margin-top:10px}
 
 .thumb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
@@ -1069,7 +1097,56 @@ box-shadow:0 20px 50px rgba(255,122,0,.2), 0 0 30px rgba(255,122,0,.1);
   background:#111;
   border:1px solid rgba(255,255,255,.08);
   transition:all .4s ease;
+  opacity: 1;
 }
+
+.project-card:hover video,
+.project-card.touch-active video {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.project-card {
+  position: relative;
+}
+
+.project-card .play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 122, 0, 0.85);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  opacity: 1;
+}
+
+.project-card .play-button:before {
+  content: '▶';
+  color: #fff;
+  font-size: 28px;
+  margin-left: 4px;
+}
+
+.project-card .play-button:hover {
+  background: rgba(255, 122, 0, 1);
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 0 30px rgba(255, 122, 0, 0.6);
+}
+
+.project-card video.playing ~ .play-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .project-card[data-category="ui"] video,
 .project-card[data-category="fx"] video,
 .project-card[data-category="reel"] video{
@@ -1939,6 +2016,80 @@ animation:glowPulse 2s ease-in-out infinite;
   .cta-row{flex-direction:column;align-items:stretch}
 }
 
+/* MOBILE PERFORMANCE OPTIMIZATIONS */
+@media(max-width:768px){
+  /* Disable heavy animations on mobile */
+  body::before,
+  body::after,
+  .morph-shape,
+  .particle-explosion,
+  .floating-element,
+  .particle-cloud,
+  .bg-particles{
+    display:none !important;
+  }
+  
+  /* Disable parallax on mobile */
+  .hero-bg{
+    transform:none !important;
+  }
+  
+  /* Disable scroll-triggered sparkles */
+  .sparkle{
+    display:none !important;
+  }
+  
+  /* Improve video performance */
+  video{
+    will-change:auto;
+    transform:translate3d(0,0,0);
+  }
+  
+  /* Reduce animation complexity */
+  @keyframes bgPulse{
+    0%, 100%{transform:scale(1)}
+    50%{transform:scale(1.05)}
+  }
+  
+  @keyframes meshMove{
+    0%{transform:translate(0,0)}
+    100%{transform:translate(0,0)}
+  }
+  
+  /* Better mobile button styling */
+  .btn-primary, .btn-secondary {
+    min-height:48px;
+    padding:14px 20px;
+    font-size:16px;
+    border-radius:12px;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+  
+  .btn-primary:active, .btn-secondary:active {
+    transform:translateY(-1px);
+  }
+  
+  /* Improve form inputs for mobile */
+  input[type="email"],
+  input[type="text"],
+  textarea {
+    font-size:16px !important;
+    -webkit-appearance:none;
+    appearance:none;
+    border-radius:8px;
+  }
+  
+  /* Better touch targets */
+  nav a, 
+  button,
+  .interactive-card {
+    min-height:44px;
+    min-width:44px;
+  }
+}
+
 @media(max-width:600px){
   h1{font-size:30px;}
   h2{font-size:26px;}
@@ -2105,6 +2256,82 @@ animation:glowPulse 2s ease-in-out infinite;
   }
 }
 
+/* Video Modal Styles */
+.video-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  max-width: 1400px;
+  max-height: 800px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 100px rgba(255, 122, 0, 0.3);
+  border: 2px solid rgba(255, 122, 0, 0.4);
+}
+
+.video-modal video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 122, 0, 0.8);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  transition: all 0.3s ease;
+}
+
+.video-modal-close:hover {
+  background: rgba(255, 122, 0, 1);
+  transform: rotate(90deg) scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .video-modal-content {
+    width: 95vw;
+    height: 95vh;
+  }
+
+  .video-modal-close {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
 
 </style>
 
@@ -2112,11 +2339,26 @@ animation:glowPulse 2s ease-in-out infinite;
 </head>
 
 <body>
+<noscript>
+  <div style="background:#ff6b6b; color:#fff; padding:20px; text-align:center; font-weight:bold;">
+    JavaScript is disabled in your browser. For the best experience, please enable JavaScript or upgrade to a modern browser.
+    <a href="https://www.enable-javascript.com/" style="color:#fff; text-decoration:underline;">Learn how to enable JavaScript</a>
+  </div>
+</noscript>
+
 <div id="scrollProgress"></div>
+
+<!-- Video Modal -->
+<div id="videoModal" class="video-modal">
+  <div class="video-modal-content">
+    <video id="fullscreenVideo" muted autoplay loop playsinline></video>
+    <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+  </div>
+</div>
 
 <!-- PRELOADER -->
 <div id="preloader">
-  <div class="loader-logo"><img src="logo.png"></div>
+  <div class="loader-logo"><img src="logo.png" alt="MR Creative Games"></div>
 </div>
 
 <header>
@@ -2321,63 +2563,63 @@ animation:glowPulse 2s ease-in-out infinite;
 
 <div class="portfolio-grid">
 <div class="project-card" data-category="symbols" data-video="projects/Hammer_Symbol_Idle_Final.webm">
-<video src="projects/Hammer_Symbol_Idle_Final.webm" muted autoplay loop></video>
+<video src="projects/Hammer_Symbol_Idle_Final.webm" muted loop playsinline preload="metadata"></video>
 <h3>Hammer Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Scatter.webm">
-<video src="projects/Scatter.webm" muted autoplay loop></video>
+<video src="projects/Scatter.webm" muted loop playsinline preload="metadata"></video>
 <h3>Scatter Symbol</h3>
 </div>
-<div class="project-card" data-category="symbols" data-video="projects/slot-symbol.mp4">
-<video src="projects/slot-symbol.mp4" muted autoplay loop></video>
+<div class="project-card" data-category="symbols" data-video="projects/slot-symbol.webm">
+<video src="projects/slot-symbol.webm" muted loop playsinline preload="metadata"></video>
 <h3>Slot Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Viking_Character_Symbol_Final.webm">
-<video src="projects/Viking_Character_Symbol_Final.webm" muted autoplay loop></video>
+<video src="projects/Viking_Character_Symbol_Final.webm" muted loop playsinline preload="metadata"></video>
 <h3>Viking Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Viking_Character_Symbol_Hammer_Symbol_Idle_Final.webm">
-<video src="projects/Viking_Character_Symbol_Hammer_Symbol_Idle_Final.webm" muted autoplay loop></video>
+<video src="projects/Viking_Character_Symbol_Hammer_Symbol_Idle_Final.webm" muted loop playsinline preload="metadata"></video>
 <h3>Viking Hammer Symbol</h3>
 </div>
 <div class="project-card" data-category="symbols" data-video="projects/Wild.webm">
-<video src="projects/Wild.webm" muted autoplay loop></video>
+<video src="projects/Wild.webm" muted loop playsinline preload="metadata"></video>
 <h3>Wild Symbol</h3>
 </div>
 <div class="project-card" data-category="fx" data-video="projects/fx-ui.webm">
-<video src="projects/fx-ui.webm" muted autoplay loop></video>
+<video src="projects/fx-ui.webm" muted loop playsinline preload="metadata"></video>
 <h3>FX UI</h3>
 </div>
-<div class="project-card" data-category="fx" data-video="projects/samurai-animation.webm">
-<video src="projects/samurai-animation.webm" muted autoplay loop></video>
-<h3>Samurai FX</h3>
+<div class="project-card" data-category="ui" data-video="projects/samurai-animation.webm">
+<video src="projects/samurai-animation.webm" muted loop playsinline preload="metadata"></video>
+<h3>Samurai UI</h3>
 </div>
 <div class="project-card" data-category="fx" data-video="projects/slot-symbol.webm">
-<video src="projects/slot-symbol.webm" muted autoplay loop></video>
+<video src="projects/slot-symbol.webm" muted loop playsinline preload="metadata"></video>
 <h3>Slot Symbol FX</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/spine-character.webm">
-<video src="projects/spine-character.webm" muted autoplay loop></video>
+<video src="projects/spine-character.webm" muted loop playsinline preload="metadata"></video>
 <h3>Spine Character</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/RUN.webm">
-<video src="projects/RUN.webm" muted autoplay loop></video>
+<video src="projects/RUN.webm" muted loop playsinline preload="metadata"></video>
 <h3>Run Animation</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/Lady_Talbot_2.webm">
-<video src="projects/Lady_Talbot_2.webm" muted autoplay loop></video>
+<video src="projects/Lady_Talbot_2.webm" muted loop playsinline preload="metadata"></video>
 <h3>Lady Talbot</h3>
 </div>
 <div class="project-card" data-category="spine" data-video="projects/IDLE.webm">
-<video src="projects/IDLE.webm" muted autoplay loop></video>
+<video src="projects/IDLE.webm" muted loop playsinline preload="metadata"></video>
 <h3>Idle Animation</h3>
 </div>
 <div class="project-card" data-category="ui" data-video="projects/samurai-animation.webm">
-<video src="projects/samurai-animation.webm" muted autoplay loop></video>
+<video src="projects/samurai-animation.webm" muted loop playsinline preload="metadata"></video>
 <h3>Samurai UI</h3>
 </div>
 <div class="project-card" data-category="reel" data-video="projects/slot-symbol.webm">
-<video src="projects/slot-symbol.webm" muted autoplay loop></video>
+<video src="projects/slot-symbol.webm" muted loop playsinline preload="metadata"></video>
 <h3>Reel Animation</h3>
 </div>
 </div>
@@ -3025,20 +3267,30 @@ const menuToggle = document.querySelector('.menu-toggle');
 const navMenu = document.querySelector('header nav');
 
 if(menuToggle && navMenu){
-  menuToggle.addEventListener('click', ()=>{
+  // Handle both click and touch events
+  const toggleMenu = () => {
     const isOpen = navMenu.classList.toggle('open');
     menuToggle.classList.toggle('active', isOpen);
     document.body.classList.toggle('nav-open', isOpen);
     menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  };
+  
+  menuToggle.addEventListener('click', toggleMenu);
+  menuToggle.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    toggleMenu();
   });
 
   navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', ()=>{
+    const closeMenu = () => {
       navMenu.classList.remove('open');
       menuToggle.classList.remove('active');
       document.body.classList.remove('nav-open');
       menuToggle.setAttribute('aria-expanded','false');
-    });
+    };
+    
+    link.addEventListener('click', closeMenu);
+    link.addEventListener('touchend', closeMenu);
   });
 }
 
@@ -3110,22 +3362,17 @@ window.addEventListener("scroll",()=>{
   }
 });
 
-/* EmailJS Configuration for Auto-Reply Emails */
-emailjs.init("SERVICE_ID_PLACEHOLDER");
-
-/* Contact form handling - Sends to mrcreativegames.office@gmail.com via FormSubmit and auto-reply via EmailJS */
+/* Contact form handling - Sends to mrcreativegames.office@gmail.com via FormSubmit */
 const contactForm = document.getElementById("contactForm");
 const formMessage = document.getElementById("formMessage");
 
 if(contactForm){
+  // Set FormSubmit endpoint
+  contactForm.action = "https://formsubmit.co/mrcreativegames.office@gmail.com";
+  
   contactForm.addEventListener("submit", async (e)=>{
     e.preventDefault();
     
-    const formData = new FormData(contactForm);
-    const name = formData.get("name");
-    const userEmail = formData.get("email");
-    const phone = formData.get("phone") || "Not provided";
-    const message = formData.get("message");
     const submitButton = contactForm.querySelector("button[type='submit']");
     const originalText = submitButton.textContent;
     
@@ -3138,30 +3385,16 @@ if(contactForm){
     try{
       const response = await fetch(contactForm.action, {
         method: "POST",
-        body: formData,
+        body: new FormData(contactForm),
         headers: { Accept: "application/json" }
       });
       
       if(response.ok){
-        // Send auto-reply email via EmailJS
-        try{
-          await emailjs.send("SERVICE_ID_PLACEHOLDER", "TEMPLATE_ID_PLACEHOLDER", {
-            to_email: userEmail,
-            user_name: name,
-            user_phone: phone,
-            user_message: message
-          });
-          console.log("Auto-reply sent successfully");
-        }catch(emailError){
-          console.warn("Auto-reply failed, but form was submitted:", emailError);
-        }
-        
-        formMessage.textContent = "Thank you! Your message has been sent successfully to mrcreativegames.office@gmail.com. You will receive a confirmation email shortly. We'll get back to you soon!";
+        formMessage.textContent = "Thank you! Your message has been sent successfully to mrcreativegames.office@gmail.com. We'll get back to you soon!";
         formMessage.className = "form-message success";
         contactForm.reset();
       }else{
-        const data = await response.json();
-        throw new Error(data.error || "Form submission failed");
+        throw new Error("Form submission failed");
       }
     }catch(error){
       formMessage.textContent = "Oops! Something went wrong. Please email us directly at mrcreativegames.office@gmail.com or try again.";
@@ -3265,47 +3498,95 @@ function createParticles() {
   }
 }
 
-// Mobile-safe video setup: inline playback, muted fallback, and visibility-based play/pause
-document.querySelectorAll("video").forEach(video=>{
-  video.setAttribute("playsinline", "true");
-  video.preload = "metadata"; // load metadata but not full video
-  if(!video.hasAttribute("muted")){
-    video.muted = true;
-  }
-  // Add controls to improve reliability on mobile autoplay policies
-  if(!video.hasAttribute("controls")){
-    video.setAttribute("controls","controls");
-  }
-  // Nudge autoplay-safe flags
-  if(!video.hasAttribute("autoplay")){
-    video.setAttribute("autoplay", "autoplay");
-  }
-  if(!video.hasAttribute("loop")){
-    video.setAttribute("loop", "loop");
-  }
+// Lazy load videos to prevent buffering - critical optimization
+const videoLoadMap = new Set();
 
-  // Disable autoplay on small screens to prevent buffering until user plays
-  if(window.matchMedia && window.matchMedia('(max-width: 900px)').matches){
-    video.removeAttribute('autoplay');
-    video.pause();
-  }
-});
+// Feature detection for browser capabilities
+const browserFeatures = {
+  supportsWebM: (() => {
+    try {
+      const canvas = document.createElement('canvas');
+      return canvas.toDataURL('image/webp') !== canvas.toDataURL('image/png') || 
+             document.createElement('video').canPlayType('video/webm; codecs="vp9"') !== '';
+    } catch (e) {
+      return false;
+    }
+  })(),
+  supportsMP4: (() => {
+    try {
+      return document.createElement('video').canPlayType('video/mp4; codecs="avc1.42E01E"') !== '';
+    } catch (e) {
+      return false;
+    }
+  })(),
+  supportsIntersectionObserver: 'IntersectionObserver' in window,
+  mobileDevice: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+};
 
-const videoObserver = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    const vid = entry.target;
-    if(entry.isIntersecting){
-      if(vid.dataset.src && !vid.src){
-        vid.src = vid.dataset.src;
+// Browser compatibility check
+if (!browserFeatures.supportsIntersectionObserver) {
+  console.warn('IntersectionObserver not supported, videos will not lazy-load optimally');
+}
+
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const video = entry.target;
+    
+    if (entry.isIntersecting && !videoLoadMap.has(video)) {
+      videoLoadMap.add(video);
+      
+      // Set up video attributes
+      video.setAttribute("playsinline", "true");
+      video.muted = true;
+      video.loop = true;
+      
+      // Load video source if not already loaded
+      if (!video.src && video.dataset.src) {
+        video.src = video.dataset.src;
       }
-      vid.play().catch(()=>{});
-    }else{
-      vid.pause();
+      
+      // Mobile check
+      const isMobile = browserFeatures.mobileDevice || window.matchMedia('(max-width: 900px)').matches;
+      
+      // Set preload based on device type
+      video.preload = isMobile ? "none" : "metadata";
+      
+      // Desktop: autoplay when visible
+      if (!isMobile) {
+        video.autoplay = true;
+        // Small delay to ensure smooth loading
+        setTimeout(() => {
+          if (video.paused && video.readyState >= 2) {
+            video.play().catch(err => {
+              console.warn('Video autoplay failed:', video.src);
+            });
+          }
+        }, 200);
+      } else {
+        // Mobile: require user interaction
+        video.autoplay = false;
+        video.controls = true;
+      }
+    } else if (!entry.isIntersecting && videoLoadMap.has(video)) {
+      // Pause video when out of view
+      video.pause();
     }
   });
-},{threshold:0.25});
+}, { threshold: 0.1, rootMargin: '50px' });
 
-document.querySelectorAll("video").forEach(vid=>videoObserver.observe(vid));
+// Observe all videos
+document.querySelectorAll("video").forEach(video => {
+  videoObserver.observe(video);
+});
+
+// Browser compatibility: Handle older browsers without IntersectionObserver
+if (!browserFeatures.supportsIntersectionObserver) {
+  document.querySelectorAll("video").forEach(video => {
+    video.preload = "metadata";
+    video.autoplay = true;
+    video.muted = true;
+  });
+}
 
 /* Service grid animation on scroll */
 const serviceObserver = new IntersectionObserver(entries => {
@@ -3363,20 +3644,29 @@ if (portfolioSection) {
 
 /* Initialize particles when page loads */
 window.addEventListener("load", () => {
+  // Check if mobile device
+  const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
   createParticles();
   createFloatingIcons();
   initMagneticButtons();
   initScrollProgress();
-  initParallax();
+  
+  // Only initialize heavy animations on desktop
+  if (!isMobile) {
+    initParallax();
+    initParticleExplosion();
+    addMorphingShapes();
+    addSparkles();
+    addWaveAnimations();
+    createBackgroundParticles();
+    createFloatingShapes();
+    addParticleClouds();
+  }
+  
   addRippleEffect();
-  initParticleExplosion();
-  addMorphingShapes();
-  addSparkles();
-  addWaveAnimations();
   initCounters();
-  createBackgroundParticles();
-  createFloatingShapes();
-  addParticleClouds();
+  initVideoClickHandlers();
 });
 
 /* Create floating decorative icons */
@@ -3486,6 +3776,11 @@ function addRippleEffect() {
 
 /* Particle explosion on hover */
 function initParticleExplosion() {
+  // Skip on mobile devices for better performance
+  if (/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    return;
+  }
+  
   const elements = document.querySelectorAll('.service-card, .project-card, .btn-primary');
   
   elements.forEach(el => {
@@ -3711,6 +4006,126 @@ function addParticleClouds() {
   });
 }
 
+/* Browser error handling and compatibility */
+window.addEventListener('error', (event) => {
+  console.error('Runtime error:', event.error);
+  // Gracefully degrade if scripts fail
+});
+
+/* Video Modal Functions */
+function openVideoModal(videoSrc) {
+  const modal = document.getElementById('videoModal');
+  const videoElement = document.getElementById('fullscreenVideo');
+  
+  videoElement.src = videoSrc;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Ensure video plays
+  videoElement.play().catch(err => console.log('Video play error:', err));
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const videoElement = document.getElementById('fullscreenVideo');
+  
+  videoElement.pause();
+  videoElement.src = '';
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+/* Close modal when clicking outside the video */
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('videoModal');
+  if (e.target === modal) {
+    closeVideoModal();
+  }
+});
+
+/* Close modal with Escape key */
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeVideoModal();
+  }
+});
+
+/* Initialize video click handlers */
+function initVideoClickHandlers() {
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach(card => {
+    const video = card.querySelector('video');
+    
+    if (!video) return;
+    
+    // Preload video data on hover for smooth playback
+    card.addEventListener('mouseenter', () => {
+      // Change preload to auto when user hovers
+      if (video.preload !== 'auto') {
+        video.preload = 'auto';
+      }
+      video.play().catch(err => console.log('Video play error:', err));
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+      // Reset to metadata-only after user leaves to save bandwidth
+      video.preload = 'metadata';
+    });
+    
+    // Touch events - Mobile
+    let touchStartTime = 0;
+    
+    card.addEventListener('touchstart', (e) => {
+      touchStartTime = Date.now();
+      card.classList.add('touch-active');
+      // Preload on touch
+      if (video.preload !== 'auto') {
+        video.preload = 'auto';
+      }
+      video.play().catch(err => console.log('Video play error:', err));
+    });
+    
+    card.addEventListener('touchend', () => {
+      card.classList.remove('touch-active');
+      video.pause();
+      video.currentTime = 0;
+      // Reset to metadata-only after touch
+      video.preload = 'metadata';
+    });
+    
+    // Fullscreen modal click on video
+    video.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const videoSrc = video.src;
+      if (videoSrc) {
+        openVideoModal(videoSrc);
+      }
+    });
+  });
+}
+
+// Detect browser and show compatibility warning if needed
+const browserWarning = () => {
+  const isIE = /MSIE|Trident|rv:11/.test(navigator.userAgent);
+  const isOldEdge = /Edge\//.test(navigator.userAgent) && !/Edg/.test(navigator.userAgent);
+  
+  if (isIE) {
+    console.warn('Internet Explorer detected. For best experience, please use a modern browser like Chrome, Firefox, Edge, or Safari.');
+  }
+  if (isOldEdge) {
+    console.warn('Old Edge (Legacy) detected. Please update to the new Chromium-based Edge for better performance.');
+  }
+};
+
+browserWarning();
+
+// Fallback for critical functions if polyfills don't load
+if (!window.Promise) {
+  console.warn('Promise not available. Some features may not work as expected.');
+}
 
 </script>
 
